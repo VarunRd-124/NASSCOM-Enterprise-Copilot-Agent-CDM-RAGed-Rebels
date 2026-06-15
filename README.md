@@ -26,10 +26,11 @@ Nasscomm_App/
 ├── notebooks/
 │   ├── 01_ingest_to_delta.py            # PDFs → Bronze/Silver/Gold Delta
 │   ├── 02_create_vector_index.py        # Mosaic AI Vector Search index
-│   ├── 03_build_knowledge_graph.py      # Entity extraction → Neo4j
+│   ├── 03_build_knowledge_graph.py      # Entity extraction 
 │   └── 04_create_feedback_table.sql     # Feedback Delta table
+|   |__ 05_neo4j_graph_retrieval.py      # Knowledge Graph Building 
 ├── app/
-│   ├── streamlit_app.py                 # Main UI
+│   ├── app.py                 # Main UI
 │   ├── retrieval.py                     # Vector + graph + fusion + rerank
 │   ├── generation.py                    # DBRX + Claude fallback
 │   ├── feedback.py                      # Thumbs up/down → Delta
