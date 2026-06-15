@@ -14,7 +14,7 @@ User Query ───────────────────────
 
 ```
 Nasscomm_App/
-├── data/
+├── Data/
 │   ├── docs/
 │   │   ├── kubernetes/                  # 1,669 .md files from kubernetes/website
 │   │   ├── fastapi/                     #   153 .md files from tiangolo/fastapi
@@ -23,7 +23,7 @@ Nasscomm_App/
 │   ├── *_sop_synthetic_pdf_dataset/     #  48 synthetic SOP PDFs (given)
 │   ├── tickets.csv                      #  50 historical tickets
 │   └── logs.csv                         #  50 log events
-├── notebooks/
+├── Notebooks/
 │   ├── 01_ingest_to_delta.py            # PDFs → Bronze/Silver/Gold Delta
 │   ├── 02_create_vector_index.py        # Mosaic AI Vector Search index
 │   ├── 03_build_knowledge_graph.py      # Entity extraction 
