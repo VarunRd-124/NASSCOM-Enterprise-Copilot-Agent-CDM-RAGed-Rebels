@@ -125,32 +125,6 @@ databricks apps deploy ekc-app --source-code-path .
 ```
 Secret refs in `app/app.yaml` map to your `ekc` secret scope.
 
-## What the demo shows the judges
-
-1. **Live retrieval trace** — the sidebar shows each stage of the architecture
-   firing (service detect → vector → graph → fuse → rerank → generate) so judges
-   can *see* the pipeline working, not just the answer.
-2. **Hybrid wins where pure vector loses** — graph hits surface the *known*
-   resolution from past tickets even when the user phrases the issue differently.
-3. **Citations** — every claim is cited with `[1] [2] …` linking back to the
-   exact SOP / ticket / log / graph fact.
-4. **Escalation path** — when reranker confidence drops below `0.35`, the agent
-   refuses to hallucinate and surfaces the closest SOPs with an explicit
-   *escalate to on-call* banner.
-5. **Closed loop** — thumbs up/down writes to `gold.user_feedback`, ready for
-   the next training cycle.
-
-## Demo script (≈3 min)
-
-1. Click sample query *"Why is Kafka consumer lag increasing in cluster X?"* —
-   point at the live trace, show vector + graph both contributing.
-2. Click *"Pod stuck in CrashLoopBackOff"* — show the answer pulling from
-   ticket `T002`, log `L005`, and SOP `01_kubernetes_pod_crashloopbackoff…`.
-3. Type a noisy off-topic query (`"is the printer broken"`) — show the
-   escalation banner kicking in.
-4. Give 👎 on the off-topic query, add a note, show the row landing in
-   `ekc.gold.user_feedback` via a SQL cell.
-
 ## Key knobs (in `app/config.py`)
 
 | Setting | Default | What it controls |
