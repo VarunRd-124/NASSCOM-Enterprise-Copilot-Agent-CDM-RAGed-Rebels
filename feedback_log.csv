@@ -1,0 +1,178 @@
+feedback_id,ts,user_email,query,answer,model_used,rating,comment,n_citations,citation_ids
+c4872b5c-1369-430d-a4c5-b99a0223f218,2026-06-15T15:08:31.209462+00:00,anonymous,Why is Kafka consumer lag increasing?,"# Kafka Consumer Lag Increasing
+
+**Likely cause** — Messages are not being consumed fast enough, typically because the number of consumers is insufficient relative to the partition count or because consumers are experiencing slow processing (e.g., retry storms, database latency, or blocked threads) [1][2][3].
+
+**Resolution steps**
+
+1. **Confirm the alert and identify scope** — Determine the affected consumer group, topic, and partition where lag is increasing [1].
+
+2. **Capture current lag metrics** — Run:
+   ```bash
+   kafka-consumer-groups --bootstrap-server <broker> --describe --group <consumer-group>
+   ```
+   This shows current offset, log end offset, and per-partition lag [1].
+
+3. **Review application logs** — Look for slow processing, retry storms, database latency, or blocked threads that could be throttling consumption [1].
+
+4. **Validate consumer pod/process health** — Check CPU, memory, and restart count of consumer pods or processes [1].
+
+5. **Scale consumers and increase partitions** — If consumers are healthy but simply outnumbered by the message rate, increase the topic's partition count and scale out consumer instances so each partition has a dedicated consumer [2][3].
+
+6. **Consider batching optimizations** — Ensure consumers are fetching in large linear chunks rather than single messages to maximize throughput, leveraging Kafka's message-set abstraction [5].
+
+**Verification**
+
+- Re-run `kafka-consumer-groups --describe --group <consumer-group>` and confirm the lag value is steadily decreasing toward zero [1][4].
+- Monitor the `ConsumerLag` metric (`kafka.server:type=FetcherLagMetrics,name=ConsumerLag`) and verify it trends downward continuously [4].
+- Confirm that error log entries with code `KAFKA_LAG` (""Consumer lag exceeded threshold"") stop appearing [1].",databricks-claude-opus-4-6,up,,5,"01_kafka_consumer_lag_resolution_sop,T005,T005,Kafka::operations::basic-kafka-operations,Kafka::design::design"
+982940de-72e2-44f1-a332-2aa0ed6e34ef,2026-06-15T15:30:28.516704+00:00,anonymous,Pod stuck in CrashLoopBackOff,"# Pod Stuck in CrashLoopBackOff
+
+**Likely cause** — The pod is repeatedly crashing due to configuration errors, runtime failures, missing dependencies, or a broken Pod Network add-on [1][4]. For CoreDNS specifically, SELinux conflicts with older Docker versions or DNS loop detection can also trigger this state [2].
+
+---
+
+**Resolution steps**
+
+1. **Check pod status and events** to identify the failing container and reason:
+   ```bash
+   kubectl describe pod <pod-name> -n <namespace>
+   ```
+   Look for error messages in the `Events` section and `Last State` termination reason [3].
+
+2. **Inspect pod logs** for application-level errors:
+   ```bash
+   kubectl logs <pod-name> -n <namespace> --previous
+   ```
+   Fix any config errors or missing dependencies revealed in the logs [4].
+
+3. **If the issue is with CoreDNS on SELinux nodes**, apply one of these fixes [2]:
+   - Upgrade to a newer version of Docker.
+   - Disable SELinux.
+   - Allow privilege escalation for the coredns deployment:
+     ```bash
+     kubectl -n kube-system get deployment coredns -o yaml | \
+       sed 's/allowPrivilegeEscalation: false/allowPrivilegeEscalation: true/g' | \
+       kubectl apply -f -
+     ```
+
+4. **If the issue occurs after deploying a network add-on**, verify the Pod Network add-on is functioning correctly — you may need to grant it more RBAC privileges or upgrade to a newer version [1].
+
+5. **If CoreDNS detects a DNS loop**, investigate and apply workarounds to break the loop (e.g., modifying the CoreDNS Corefile or upstream DNS configuration) [2].
+
+6. **Review manifests, secrets, configmaps, RBAC bindings, and PVCs** for misconfigurations that could prevent the container from starting successfully [3].
+
+---
+
+**Verification**
+
+- Confirm the pod transitions to `Running` and the `Ready` condition is reported [5]:
+  ```bash
+  kubectl get pod <pod-name> -n <namespace> -w
+  ```
+- Check that restart count stabilizes (no further increments):
+  ```bash
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].restartCount}'
+  ```
+- Monitor logs to ensure no new errors appear:
+  ```bash
+  kubectl logs <pod-name> -n <namespace> -f
+  ```
+
+If the context above does not match your specific scenario (e.g., the crash is caused by an application bug not covered here), escalate per your team's incident management process [3].",databricks-claude-opus-4-6,down,"took lot of time, not aligned",5,"Kubernetes::setup::production-environment::tools::kubeadm::troubleshooting-kubeadm,Kubernetes::setup::production-environment::tools::kubeadm::troubleshooting-kubeadm,01_kubernetes_pod_crashloopbackoff_resolution_sop,T002,Kubernetes::tasks::run-application::configure-pdb"
+6e10b7fe-e75e-43a5-8723-b74f37b318ec,2026-06-15T15:31:06.974048+00:00,anonymous,Pod stuck in CrashLoopBackOff,"# Pod Stuck in CrashLoopBackOff
+
+**Likely cause** — The pod is repeatedly crashing due to configuration errors, runtime failures, missing dependencies, or a broken Pod Network add-on [1][4]. For CoreDNS specifically, SELinux conflicts with older Docker versions or DNS loop detection can also trigger this state [2].
+
+---
+
+**Resolution steps**
+
+1. **Check pod status and events** to identify the failing container and reason:
+   ```bash
+   kubectl describe pod <pod-name> -n <namespace>
+   ```
+   Look for error messages in the `Events` section and `Last State` termination reason [3].
+
+2. **Inspect pod logs** for application-level errors:
+   ```bash
+   kubectl logs <pod-name> -n <namespace> --previous
+   ```
+   Fix any config errors or missing dependencies revealed in the logs [4].
+
+3. **If the issue is with CoreDNS on SELinux nodes**, apply one of these fixes [2]:
+   - Upgrade to a newer version of Docker.
+   - Disable SELinux.
+   - Allow privilege escalation for the coredns deployment:
+     ```bash
+     kubectl -n kube-system get deployment coredns -o yaml | \
+       sed 's/allowPrivilegeEscalation: false/allowPrivilegeEscalation: true/g' | \
+       kubectl apply -f -
+     ```
+
+4. **If the issue occurs after deploying a network add-on**, verify the Pod Network add-on is functioning correctly — you may need to grant it more RBAC privileges or upgrade to a newer version [1].
+
+5. **If CoreDNS detects a DNS loop**, investigate and apply workarounds to break the loop (e.g., modifying the CoreDNS Corefile or upstream DNS configuration) [2].
+
+6. **Review manifests, secrets, configmaps, RBAC bindings, and PVCs** for misconfigurations that could prevent the container from starting successfully [3].
+
+---
+
+**Verification**
+
+- Confirm the pod transitions to `Running` and the `Ready` condition is reported [5]:
+  ```bash
+  kubectl get pod <pod-name> -n <namespace> -w
+  ```
+- Check that restart count stabilizes (no further increments):
+  ```bash
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].restartCount}'
+  ```
+- Monitor logs to ensure no new errors appear:
+  ```bash
+  kubectl logs <pod-name> -n <namespace> -f
+  ```
+
+If the context above does not match your specific scenario (e.g., the crash is caused by an application bug not covered here), escalate per your team's incident management process [3].",databricks-claude-opus-4-6,down,not good,5,"Kubernetes::setup::production-environment::tools::kubeadm::troubleshooting-kubeadm,Kubernetes::setup::production-environment::tools::kubeadm::troubleshooting-kubeadm,01_kubernetes_pod_crashloopbackoff_resolution_sop,T002,Kubernetes::tasks::run-application::configure-pdb"
+9c3e48ba-dd52-4b14-a20e-f14c817ef1df,2026-06-15T15:36:31.339493+00:00,anonymous,Docker exit code 137,"**Likely cause** — Docker exit code 137 indicates the container was killed by the system (typically an Out-Of-Memory kill via SIGKILL, signal 9: 128+9=137). The logs confirm containers are exiting unexpectedly and restarting repeatedly with this code [1][2][3].
+
+**Resolution steps**
+
+1. **Confirm OOM kill** — Check if the kernel OOM killer terminated the container:
+   ```bash
+   docker inspect <container_id> --format='{{.State.OOMKilled}}'
+   ```
+   Also check host logs:
+   ```bash
+   dmesg | grep -i ""oom\|killed process""
+   ```
+   [1][2]
+
+2. **Review container memory limits** — Inspect the memory constraint set on the container:
+   ```bash
+   docker inspect <container_id> --format='{{.HostConfig.Memory}}'
+   ```
+   If the limit is too low for the workload, increase it in your `docker run` command or Compose file (`mem_limit` / `deploy.resources.limits.memory`). [3]
+
+3. **Check for external SIGKILL** — If `OOMKilled` is `false`, another process or orchestrator may be sending SIGKILL. Review:
+   ```bash
+   docker events --filter container=<container_id>
+   ```
+   Look for `kill` events and identify the source (e.g., Docker daemon restart, manual `docker kill`, or orchestrator health-check failure). [3]
+
+4. **Increase resources or optimize the application** — Either raise the memory limit to match actual usage, or profile the application inside the container to reduce memory consumption. If the container is restarting repeatedly [3], also consider adding a restart back-off policy (`--restart=on-failure:5`) to prevent crash loops.
+
+5. **Check host-level memory pressure** — Run `free -m` and review whether the host itself is under memory pressure, which can cause the kernel to kill containers even without per-container limits.
+
+**Verification**
+
+- After applying the fix, monitor the container:
+  ```bash
+  docker stats <container_id>
+  ```
+- Confirm the container remains running:
+  ```bash
+  docker inspect <container_id> --format='{{.State.Status}} OOMKilled={{.State.OOMKilled}}'
+  ```
+  Expected output: `running OOMKilled=false`
+- Verify no further `DOCKER_137` log entries appear [1][2][3].",databricks-claude-opus-4-6,down,not helpful,5,"L042,L001,L022,Docker::manuals::engine::release-notes::23.0,Docker::manuals::engine::release-notes::23.0"
