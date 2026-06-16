@@ -1,0 +1,51 @@
+ticket_id,issue,category,service,severity,description,resolution,status
+T001,Docker container not starting,Deployment,Docker,High,Container exits immediately after run command,Check logs using docker logs and fix missing environment variables,Resolved
+T002,Kubernetes pod crash loop,Deployment,Kubernetes,Critical,Pod keeps restarting with CrashLoopBackOff,Check pod logs and fix config errors or missing dependencies,Resolved
+T003,FastAPI endpoint returning 500 error,API,FastAPI,High,API fails when calling POST endpoint,Validate request schema and fix input validation logic,Resolved
+T004,Docker image build failing,Build,Docker,Medium,Docker build fails due to missing dependencies,Update Dockerfile and install required packages,Resolved
+T005,Kafka consumer lag increasing,Streaming,Kafka,High,Messages are not consumed fast enough,Increase partitions and scale consumers,Resolved
+T006,Kubernetes service not reachable,Networking,Kubernetes,High,Service not accessible externally,Check service type and ingress configuration,Resolved
+T007,FastAPI authentication failing,Security,FastAPI,Medium,JWT token validation failing,Check token expiration and secret key configuration,Resolved
+T008,Docker network issue,Networking,Docker,Medium,Containers cannot communicate with each other,Verify docker network settings and bridge configuration,Resolved
+T009,Kubernetes deployment not updating,Deployment,Kubernetes,Medium,New image not reflecting in pods,Check image pull policy and rollout status,Resolved
+T010,API response delay,Performance,FastAPI,Low,API response time is high,Optimize database queries and enable caching,Resolved
+T011,Kafka broker not available,Streaming,Kafka,Critical,Broker connection failing,Restart broker and check cluster health,Resolved
+T012,Docker volume not persisting data,Storage,Docker,Medium,Data lost after container restart,Use named volumes instead of anonymous volumes,Resolved
+T013,Kubernetes node not ready,Infrastructure,Kubernetes,Critical,Node status showing NotReady,Check node logs and kubelet service,Resolved
+T014,FastAPI CORS issue,API,FastAPI,Low,Frontend unable to call API,Enable CORS middleware in FastAPI,Resolved
+T015,Kafka topic not created,Streaming,Kafka,Medium,Producer failing to send messages,Create topic manually or enable auto creation,Resolved
+T016,Docker permission denied error,Security,Docker,Medium,User cannot run docker commands,Add user to docker group,Resolved
+T017,Kubernetes ingress not routing traffic,Networking,Kubernetes,High,Traffic not reaching service,Check ingress rules and controller logs,Resolved
+T018,FastAPI app not starting,Deployment,FastAPI,High,Server crashes on startup,Check dependency versions and syntax errors,Resolved
+T019,Kafka message duplication,Streaming,Kafka,Medium,Duplicate messages received,Enable idempotent producer settings,Resolved
+T020,Docker container high CPU usage,Performance,Docker,Low,Container consuming excessive CPU,Optimize application code and limit resources,Resolved
+T021,Kubernetes configmap not updating,Configuration,Kubernetes,Low,Changes not reflected in pods,Restart pods after config update,Resolved
+T022,FastAPI timeout issue,Performance,FastAPI,Medium,Request timeout during processing,Optimize long-running operations or use async tasks,Resolved
+T023,Kafka consumer group rebalancing,Streaming,Kafka,Low,Frequent rebalancing observed,Check consumer configuration and heartbeat interval,Resolved
+T024,Docker build cache issue,Build,Docker,Low,Old layers reused incorrectly,Use --no-cache flag while building,Resolved
+T025,Kubernetes autoscaling not working,Scaling,Kubernetes,High,HPA not scaling pods,Check metrics server and thresholds,Resolved
+T026,FastAPI dependency injection issue,API,FastAPI,Low,Dependencies not resolving correctly,Check dependency function definitions,Resolved
+T027,Kafka offset reset problem,Streaming,Kafka,Medium,Consumer reading old messages,Set auto.offset.reset to latest,Resolved
+T028,Docker container restart policy issue,Deployment,Docker,Low,Container not restarting on failure,Set restart policy in docker run,Resolved
+T029,Kubernetes secret not accessible,Security,Kubernetes,Medium,Application cannot read secret,Check RBAC permissions and mount path,Resolved
+T030,FastAPI file upload error,API,FastAPI,Low,File upload endpoint failing,Check file handling logic and request format,Resolved
+T031,Kubernetes pod pending state,Deployment,Kubernetes,High,Pod stuck in pending state,Check node resources and scheduling constraints,Resolved
+T032,Docker container memory leak,Performance,Docker,High,Container memory usage keeps increasing,Fix memory leaks in application code,Resolved
+T033,FastAPI incorrect response schema,API,FastAPI,Medium,Response not matching expected schema,Validate response model definitions,Resolved
+T034,Kafka producer not sending messages,Streaming,Kafka,High,Producer fails silently,Check broker connectivity and topic existence,Resolved
+T035,Kubernetes DNS resolution issue,Networking,Kubernetes,Medium,Service names not resolving,Check CoreDNS configuration,Resolved
+T036,Docker container stuck in restarting,Deployment,Docker,High,Container continuously restarting,Check logs and fix application crash,Resolved
+T037,FastAPI dependency version conflict,Deployment,FastAPI,Medium,App fails due to incompatible libraries,Update dependency versions,Resolved
+T038,Kafka broker disk full,Infrastructure,Kafka,Critical,Broker stopped due to disk full,Clean logs or increase disk capacity,Resolved
+T039,Kubernetes pod OOMKilled,Performance,Kubernetes,High,Pod terminated due to memory limits,Increase memory limits or optimize app,Resolved
+T040,Docker image not found,Deployment,Docker,Medium,Image pull fails,Check image name and registry access,Resolved
+T041,Kubernetes API server timeout,Infrastructure,Kubernetes,Critical,API server not responding,Restart API server and check cluster health,In Progress
+T042,FastAPI websocket disconnect issue,API,FastAPI,Medium,Websocket disconnects frequently,Check connection handling logic,In Progress
+T043,Kafka topic replication issue,Streaming,Kafka,High,Replication factor not maintained,Rebalance partitions and brokers,In Progress
+T044,Docker container logs missing,Monitoring,Docker,Low,Logs not visible,Check logging driver configuration,Resolved
+T045,Kubernetes persistent volume issue,Storage,Kubernetes,Medium,Volume not mounting,Check PV and PVC binding,Resolved
+T046,FastAPI rate limiting needed,Performance,FastAPI,Low,Too many requests hitting API,Implement rate limiting middleware,Open
+T047,Kafka consumer timeout,Streaming,Kafka,Medium,Consumer timing out frequently,Adjust timeout configurations,Open
+T048,Docker container timezone mismatch,Configuration,Docker,Low,Incorrect timezone in container,Set TZ environment variable,Resolved
+T049,Kubernetes RBAC issue,Security,Kubernetes,High,User cannot access resources,Update role bindings,Resolved
+T050,FastAPI pagination issue,API,FastAPI,Low,Pagination not working correctly,Fix query logic,Resolved

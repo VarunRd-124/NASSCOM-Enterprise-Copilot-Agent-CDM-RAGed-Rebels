@@ -1,0 +1,51 @@
+log_id,timestamp,service,level,message,error_code,related_ticket
+L001,5/1/2026 10:00,Docker,ERROR,Container exited unexpectedly,DOCKER_137,T032
+L002,5/1/2026 10:01,Kubernetes,WARNING,Pod restarting frequently,K8S_RESTART,T002
+L003,5/1/2026 10:01,FastAPI,ERROR,Unhandled exception in API,API_500,T003
+L004,5/1/2026 10:02,Kafka,ERROR,Consumer lag exceeded threshold,KAFKA_LAG,T005
+L005,5/1/2026 10:02,Kubernetes,CRITICAL,CrashLoopBackOff detected,K8S_CRASH,T002
+L006,5/1/2026 10:03,Docker,WARNING,High memory usage detected,DOCKER_MEM,T032
+L007,5/1/2026 10:03,FastAPI,ERROR,Request timeout occurred,API_TIMEOUT,T022
+L008,5/1/2026 10:04,Kafka,WARNING,Frequent rebalancing detected,KAFKA_REBALANCE,T023
+L009,5/1/2026 10:04,Kubernetes,ERROR,Node NotReady state,K8S_NODE,T013
+L010,5/1/2026 10:05,Docker,ERROR,Failed to pull image,DOCKER_PULL,T040
+L011,5/1/2026 10:05,Kafka,ERROR,Broker not available,KAFKA_BROKER,T011
+L012,5/1/2026 10:06,FastAPI,WARNING,Authentication failed,API_AUTH,T007
+L013,5/1/2026 10:06,Kubernetes,ERROR,DNS resolution failed,K8S_DNS,T035
+L014,5/1/2026 10:07,Docker,ERROR,Permission denied error,DOCKER_PERM,T016
+L015,5/1/2026 10:07,Kafka,CRITICAL,Disk full on broker,KAFKA_DISK,T038
+L016,5/1/2026 10:08,FastAPI,ERROR,Response schema mismatch,API_SCHEMA,T033
+L017,5/1/2026 10:08,Kubernetes,WARNING,RBAC access denied,K8S_RBAC,T049
+L018,5/1/2026 10:09,Docker,WARNING,Network connectivity issue,DOCKER_NET,T008
+L019,5/1/2026 10:09,Kafka,ERROR,Offset reset issue,KAFKA_OFFSET,T027
+L020,5/1/2026 10:10,FastAPI,ERROR,Websocket disconnected,API_WS,T042
+L021,5/1/2026 10:10,Kubernetes,ERROR,Pod OOMKilled,K8S_CRASH,T039
+L022,5/1/2026 10:11,Docker,ERROR,Container restarting repeatedly,DOCKER_137,T036
+L023,5/1/2026 10:11,Kafka,WARNING,Consumer lag exceeded threshold,KAFKA_LAG,T005
+L024,5/1/2026 10:12,FastAPI,ERROR,Unhandled exception in API,API_500,T003
+L025,5/1/2026 10:12,Kubernetes,CRITICAL,API server timeout,K8S_NODE,T041
+L026,5/1/2026 10:13,Docker,ERROR,High memory usage detected,DOCKER_MEM,T032
+L027,5/1/2026 10:13,Kafka,ERROR,Broker not available,KAFKA_BROKER,T011
+L028,5/1/2026 10:14,FastAPI,WARNING,Request timeout occurred,API_TIMEOUT,T022
+L029,5/1/2026 10:14,Kubernetes,ERROR,CrashLoopBackOff detected,K8S_CRASH,T002
+L030,5/1/2026 10:15,Docker,WARNING,Failed to pull image,DOCKER_PULL,T040
+L031,5/1/2026 10:15,Kafka,ERROR,Offset reset issue,KAFKA_OFFSET,T027
+L032,5/1/2026 10:16,FastAPI,ERROR,Authentication failed,API_AUTH,T007
+L033,5/1/2026 10:16,Kubernetes,WARNING,DNS resolution failed,K8S_DNS,T035
+L034,5/1/2026 10:17,Docker,ERROR,Permission denied error,DOCKER_PERM,T016
+L035,5/1/2026 10:17,Kafka,CRITICAL,Disk full on broker,KAFKA_DISK,T038
+L036,5/1/2026 10:18,FastAPI,ERROR,Response schema mismatch,API_SCHEMA,T033
+L037,5/1/2026 10:18,Kubernetes,WARNING,RBAC access denied,K8S_RBAC,T049
+L038,5/1/2026 10:19,Docker,WARNING,Network connectivity issue,DOCKER_NET,T008
+L039,5/1/2026 10:19,Kafka,ERROR,Consumer lag exceeded threshold,KAFKA_LAG,T005
+L040,5/1/2026 10:20,FastAPI,ERROR,Websocket disconnected,API_WS,T042
+L041,5/1/2026 10:20,Kubernetes,ERROR,Node NotReady state,K8S_NODE,T013
+L042,5/1/2026 10:21,Docker,ERROR,Container exited unexpectedly,DOCKER_137,T032
+L043,5/1/2026 10:21,Kafka,WARNING,Frequent rebalancing detected,KAFKA_REBALANCE,T023
+L044,5/1/2026 10:22,FastAPI,ERROR,Unhandled exception in API,API_500,T003
+L045,5/1/2026 10:22,Kubernetes,CRITICAL,CrashLoopBackOff detected,K8S_CRASH,T002
+L046,5/1/2026 10:23,Docker,WARNING,High memory usage detected,DOCKER_MEM,T032
+L047,5/1/2026 10:23,Kafka,ERROR,Broker not available,KAFKA_BROKER,T011
+L048,5/1/2026 10:24,FastAPI,WARNING,Request timeout occurred,API_TIMEOUT,T022
+L049,5/1/2026 10:24,Kubernetes,ERROR,Pod restarting frequently,K8S_RESTART,T002
+L050,5/1/2026 10:25,Docker,ERROR,Failed to pull image,DOCKER_PULL,T040
